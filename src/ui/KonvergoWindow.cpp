@@ -598,6 +598,13 @@ void KonvergoWindow::focusOutEvent(QFocusEvent * ev)
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
+void KonvergoWindow::focusInEvent(QFocusEvent * ev)
+{
+  InputComponent::Get().focusIn();
+  QQuickWindow::focusInEvent(ev);
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////
 void KonvergoWindow::RegisterClass()
 {
   qmlRegisterType<KonvergoWindow>("Konvergo", 1, 0, "KonvergoWindow");

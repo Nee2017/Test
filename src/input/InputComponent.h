@@ -18,7 +18,9 @@ public:
   explicit InputBase(QObject* parent = nullptr) : QObject(parent) { qRegisterMetaType<InputBase::InputkeyState>("InputkeyState"); }
   virtual bool initInput() = 0;
   virtual const char* inputName() = 0;
-  
+
+  virtual void focusIn() {}
+
   enum InputkeyState
   {
     KeyDown,
@@ -105,6 +107,7 @@ public:
   // should be actually dispatched.
   Q_INVOKABLE void executeActions(const QStringList& actions);
   void cancelAutoRepeat();
+  void focusIn();
 
 signals:
   // Always emitted when any input arrives
@@ -116,7 +119,7 @@ signals:
 
 private Q_SLOTS:
   void remapInput(const QString& source, const QString& keycode, InputBase::InputkeyState keyState);
-  
+
 private:
   explicit InputComponent(QObject *parent = nullptr);
   bool addInput(InputBase* base);
